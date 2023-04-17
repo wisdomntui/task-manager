@@ -28,6 +28,8 @@ Route::prefix('project')->name('project')->group(function(){
 
 Route::prefix('task')->name('task')->group(function(){
     Route::post('create', [TaskController::class, 'create'])->name('.create');
+    Route::post('update', [TaskController::class, 'update'])->name('.update');
+    Route::post('delete', [TaskController::class, 'delete'])->name('.delete');
 });
 
 
