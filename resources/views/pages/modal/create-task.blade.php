@@ -1,11 +1,16 @@
 <form id="add-task-form">
     <div class="modal-body">
         <div class="row g-3">
-            <div class="col-12">
-                <div class="alert alert-success d-none" id="task-alert">Project created successfully.</div>
+            <div class="col-12"></div>
+            <div class="col-6">
                 <label for="inputAddress" class="form-label">Name</label>
                 <input type="text" class="form-control" name="name" placeholder="Task Name">
                 <span id="task-name-error-msg" class="text-danger"></span>
+            </div>
+            <div class="col-6">
+                <label for="inputAddress" class="form-label">Priority</label>
+                <input type="number" class="form-control" name="priority" placeholder="1,2,3...">
+                <span id="task-priority-error-msg" class="text-danger"></span>
             </div>
             <div class="col-12">
                 <label for="inputAddress" class="form-label">Project</label>

@@ -3,7 +3,7 @@
 @section('content')
 <div class="container">
     <div class="row justify-content-center">
-        <div class="col-md-8">
+        <div class="col-md-12">
             <div class="card">
                 <div class="card-header">
                     <button type="button" class="btn btn-primary" data-bs-target="#add-project" data-bs-toggle="modal">Add project</button>
@@ -24,7 +24,7 @@
                     <hr>
                     <div class="row">
                         <div class="col">
-                            <table class="table table-striped table-bordered" id="task-table">
+                            <table class="table table-striped table-bordered table-responsive" id="task-table">
                                 <thead>
                                     <tr>
                                         <th>#</th>
@@ -115,7 +115,9 @@
         let table = $('#task-table').DataTable({
             processing: true,
             serverSide: true,
-            rowReorder: true,
+            rowReorder: {
+                update: false,
+            },
             ajax: {
                 url: '{{ route("home") }}',
                 data: function (d) {
@@ -123,7 +125,7 @@
                 }
             },
             columns: [
-                {data: 'id', name: 'id'},
+                {data: 'priority', name: 'priority'},
                 {data: 'name', name: 'name'},
                 {data: 'description', name: 'description'},
                 {data: 'project', name: 'project.title'},
@@ -137,6 +139,45 @@
             table.draw();
         });
 
+
+        // Handle updating priority after sorting
+        table.on('row-reorder', function ( e, diff, edit ) {
+            let ids = new Array();
+            for (let i = 1; i < e.target.rows.length; i++) {
+                let b =e.target.rows[i].cells[0].innerHTML;
+                // let b2 = b[1].split('"></div>')
+                ids.push(b);
+            }
+
+            $.ajax({
+                type: "POST",
+                url: "{{route('task.reorder')}}",
+                dataType: "json",
+                data: {
+                    'priorities': ids
+                },
+                success: (data, status) => {
+                    // Reload table afterwards
+                    table.ajax.reload();
+
+                    // Reload page afterwards
+                    // setTimeout(() => {
+                    //     location.reload();
+                    // }, 2000);
+                },
+                error:function (jqXhr, textStatus, errorMessage) { // error callback 
+                    let statusCode = jqXhr.status;
+                    let message = jqXhr.responseJSON.errors;
+
+                    // if(statusCode == 422){ // Validation error
+                    //     alert(message['id']? message['id'][0]: '');
+                    // }
+                }
+            });
+            // my_sortable.ajax.url("Ajax_where_you_save_new_order.php?sort="+ encodeURIComponent(ids)).load();
+            console.log(ids);
+        });
+
         // Trigger edit 
         $('body').on('click', 'a.edit', function (e) {
             let ele = e.target;
@@ -144,6 +185,7 @@
            // Fill input fields
             $('input[name="id"]').val($(ele).data('id'));
             $('input[name="name"]').val($(ele).data('name'));
+            $('input[name="priority"]').val($(ele).data('priority'));
             $('textarea[name="description"]').val($(ele).data('description'));
             $('select[name="project"]').val($(ele).data('project'));
 

@@ -26,6 +26,7 @@
                     if(statusCode == 422){ // Validation error
                         $("#task-desc-error-msg").html(message['description']? message['description'][0]: '');
                         $("#task-name-error-msg").html(message['name']?message['name'][0]: '');
+                        $("#task-priority-error-msg").html(message['priority']?message['priority'][0]: '');
                     }
                 }
             });

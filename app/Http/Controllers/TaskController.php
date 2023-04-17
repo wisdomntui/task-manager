@@ -24,6 +24,7 @@ class TaskController extends Controller
             // Create new record
             $task = new Task();
             $task->name = $data['name'];
+            $task->priority = $data['priority'];
             $task->project_id = $data['project'];
             $task->description = $data['description'];
             $task->save();
@@ -48,6 +49,7 @@ class TaskController extends Controller
             // Create new record
             $task = Task::findOrFail($data['id']);
             $task->name = $data['name'];
+            $task->priority = $data['priority'];
             $task->project_id = $data['project'];
             $task->description = $data['description'];
             $task->save();
@@ -77,5 +79,27 @@ class TaskController extends Controller
         } catch (\Throwable $th) {
             return response()->json(['status' => false, 'message' => 'Error deleting task!']);
         }
+    }
+
+    /**
+     * Reorder tasks
+     * 
+     * @param Request $request - Request object
+     */
+    public function reorder(Request $request)
+    {
+        // Get interchanged priorities
+        $data = $request->priorities;
+
+
+        // Fetch their IDs
+        $data1Id = Task::where('priority', $data[0])->first()->id;
+        $data2Id = Task::where('priority', $data[1])->first()->id;
+
+        // Change first task priority (using their priorities because it is unique)
+        Task::findOrFail($data1Id)->update(['priority' => $data[1]]);
+        Task::findOrFail($data2Id)->update(['priority' => $data[0]]);
+
+        return response()->json(['status' => true, 'message' => 'Task updated successfully!']);
     }
 }

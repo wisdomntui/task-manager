@@ -3,7 +3,7 @@
 namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
-
+use Illuminate\Validation\Rule;
 class UpdateTaskRequest extends FormRequest
 {
     /**
@@ -23,6 +23,7 @@ class UpdateTaskRequest extends FormRequest
     {
         return [
             'name' => 'required',
+            'priority' => ['required', Rule::unique('tasks')->ignore($this->id)],
             'project' => 'required',
             'description' => 'required',
             'id' => 'required'

@@ -3,10 +3,17 @@
     <div class="modal-body">
         <div class="row g-3">
             <div class="col-12">
-                <div class="alert alert-success d-none" id="edit-task-alert">Project created successfully.</div>
+                <div class="alert alert-success d-none" id="edit-task-alert">Task updated successfully.</div>
+            </div>
+            <div class="col-6">
                 <label for="inputAddress" class="form-label">Name</label>
                 <input type="text" class="form-control" name="name" placeholder="Task Name">
                 <span id="edit-task-name-error-msg" class="text-danger"></span>
+            </div>
+            <div class="col-6">
+                <label for="inputAddress" class="form-label">Priority</label>
+                <input type="number" class="form-control" name="priority" placeholder="1,2,3...">
+                <span id="edit-task-priority-error-msg" class="text-danger"></span>
             </div>
             <div class="col-12">
                 <label for="inputAddress" class="form-label">Project</label>

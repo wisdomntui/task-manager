@@ -56,7 +56,7 @@ class HomeController extends Controller
             })->addColumn('action', function($row){
        
                 $btn = '';
-                $btn = $btn.'<a href="javascript:void(0)" class="edit btn btn-primary btn-sm" data-id="'.$row->id.'" data-name="'.$row->name.'" data-description="'.$row->description.'" data-project="'.$row->project->id.'" id="">Edit</a>';
+                $btn = $btn.'<a href="javascript:void(0)" class="edit btn btn-primary btn-sm" data-id="'.$row->id.'" data-name="'.$row->name.'" data-priority="'.$row->priority.'" data-description="'.$row->description.'" data-project="'.$row->project->id.'" id="">Edit</a>';
                 $btn = $btn.'<a href="javascript:void(0)" class="delete btn btn-danger btn-sm" data-id="'.$row->id.'">Delete</a>';
 
                 return $btn;
