@@ -28,7 +28,7 @@ class TaskController extends Controller
 
             return response()->json(['status' => true, 'message' => 'Task created successfully!']);
         } catch (\Throwable $th) {
-            return response()->json(['status' => false, 'message' => 'Error creating task!']);
+            return response()->json(['status' => false, 'message' => $data]);
         }
     }
 }

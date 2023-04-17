@@ -2,7 +2,7 @@
     <div class="modal-body">
         <div class="row g-3">
             <div class="col-12">
-                <div class="alert alert-success d-none" id="project-alert">Project created successfully.</div>
+                <div class="alert alert-success d-none" id="task-alert">Project created successfully.</div>
                 <label for="inputAddress" class="form-label">Name</label>
                 <input type="text" class="form-control" name="name" placeholder="Task Name">
                 <span id="task-name-error-msg" class="text-danger"></span>

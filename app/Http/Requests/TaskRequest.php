@@ -23,6 +23,7 @@ class TaskRequest extends FormRequest
     {
         return [
             'name' => 'required|unique:tasks',
+            'project' => 'required',
             'description' => 'required'
         ];
     }
