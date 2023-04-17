@@ -12,7 +12,20 @@
                 data,
                 success: (data, status) => {
                     //table.ajax.reload();
-                    console.log(data);
+                    $("#project-alert").removeClass('d-none');
+
+                    // Reload page afterwards
+                    setTimeout(() => {
+                        location.reload();
+                    }, 2000);
+                },
+                error:function (jqXhr, textStatus, errorMessage) { // error callback 
+                    let statusCode = jqXhr.status;
+                    let message = jqXhr.responseJSON.message;
+
+                    if(statusCode == 422){ // Validation error
+                        $("#project-error-msg").html(message);
+                    }
                 }
             });
         });

@@ -26,6 +26,10 @@ Route::prefix('project')->name('project')->group(function(){
     Route::post('create', [ProjectController::class, 'create'])->name('.create');
 });
 
+Route::prefix('task')->name('task')->group(function(){
+    Route::post('create', [TaskController::class, 'create'])->name('.create');
+});
+
 
 // Auth::routes();
 

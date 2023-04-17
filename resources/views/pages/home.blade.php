@@ -9,15 +9,14 @@
                     <button type="button" class="btn btn-primary" data-bs-target="#add-project" data-bs-toggle="modal">Add project</button>
                     <button type="button" class="btn btn-primary" data-bs-target="#add-task" data-bs-toggle="modal">Add task</button>
                 </div>
-
+                
                 <div class="card-body">
                     <div class="row">
                         <div class="col">
                             <select class="custom-select custom-select-sm text-right">
-                                <option selected>Open this select menu</option>
-                                <option value="1">One</option>
-                                <option value="2">Two</option>
-                                <option value="3">Three</option>
+                                @foreach($projects as $key => $val)
+                                    <option value="{{$key}}">{{$val}}</option>
+                                @endforeach
                               </select>
                         </div>
                     </div>
@@ -70,7 +69,7 @@
 'class' => '',
 ])
 @slot('dialogClasses', 'modal-dialog-centered modal-dialog-scrollable')
-@slot('headerClasses', 'bg-primary')
+@slot('headerClasses', '')
 @slot('title', 'Create Task')
 
 @slot('content')

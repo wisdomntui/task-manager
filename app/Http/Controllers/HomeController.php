@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Models\Project;
 
 class HomeController extends Controller
 {
@@ -23,6 +24,9 @@ class HomeController extends Controller
      */
     public function index()
     {
-        return view('pages.home');
+        // Fetch projects
+        $projects = Project::get()->pluck('title', 'id')->toArray();
+
+        return view('pages.home', compact('projects'));
     }
 }
